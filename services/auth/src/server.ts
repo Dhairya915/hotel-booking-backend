@@ -15,4 +15,4 @@ app.use(errorHandler);
 
 app.listen(env.PORT , () => {
     logger.info(`Auth service running on port ${env.PORT}`);
-});
+});// test comment
