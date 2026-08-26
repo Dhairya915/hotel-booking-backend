@@ -1,6 +1,7 @@
 import { createUser, findUserByEmail } from "../repositories/user.repository";
 import { HttpError } from "../lib/httpError";
-import type { RegisterInput } from "../schemes/auth.schema";
+import type { RegisterInput, LoginInput } from "../schemes/auth.schema";
+import { signAccessToken, signRefreshToken } from "../lib/token";
 import bcrypt from "bcrypt";
 
 export async function registerUser(input: RegisterInput) {
@@ -19,4 +20,27 @@ export async function registerUser(input: RegisterInput) {
   });
 
   return { id: user.id, name: user.name, email: user.email };
+}
+
+export async function loginUser(input: LoginInput) {
+  const user = await findUserByEmail(input.email);
+
+  if (!user) {
+    throw new HttpError(401, "Invalid credentials");
+  }
+
+  const verifyUser = await bcrypt.compare(input.password, user.password);
+
+  if (!verifyUser) {
+    throw new HttpError(401, "Invalid credentials");
+  }
+
+  const accessToken = signAccessToken({ userId: user.id, role: user.role });
+  const refreshToken = signRefreshToken({ userId: user.id });
+
+  return {
+    accessToken,
+    refreshToken,
+    user: { id: user.id, email: user.email },
+  };
 }
