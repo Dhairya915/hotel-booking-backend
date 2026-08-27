@@ -1,7 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { registerUser, loginUser } from "../services/auth.service";
+import {
+  registerUser,
+  loginUser,
+  refreshAccessToken,
+} from "../services/auth.service";
 import { registerSchema, loginSchema } from "../schemes/auth.schema";
 import { env } from "../config/env";
+import { HttpError } from "../lib/httpError";
 
 export async function register(
   req: Request,
@@ -47,6 +52,22 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 export async function me(req: Request, res: Response, next: NextFunction) {
   try {
     return res.status(200).json(req.user);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function refresh(req: Request, res: Response, next: NextFunction) {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken) {
+      throw new HttpError(401, "No refresh token");
+    }
+
+    const newToken = await refreshAccessToken(refreshToken);
+
+    res.status(200).json(newToken);
   } catch (err) {
     next(err);
   }
