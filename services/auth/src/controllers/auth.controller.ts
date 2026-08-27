@@ -43,3 +43,11 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     next(err);
   }
 }
+
+export async function me(req: Request, res: Response, next: NextFunction) {
+  try {
+    return res.status(200).json(req.user);
+  } catch (err) {
+    next(err);
+  }
+}
