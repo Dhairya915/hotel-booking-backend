@@ -10,4 +10,5 @@
  */
 export type * from './models/Hotel'
 export type * from './models/Room'
+export type * from './models/RoomAvailability'
 export type * from './commonInputTypes'

@@ -398,7 +398,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Hotel: 'Hotel',
-  Room: 'Room'
+  Room: 'Room',
+  RoomAvailability: 'RoomAvailability'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "hotel" | "room"
+    modelProps: "hotel" | "room" | "roomAvailability"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -566,6 +567,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RoomAvailability: {
+      payload: Prisma.$RoomAvailabilityPayload<ExtArgs>
+      fields: Prisma.RoomAvailabilityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RoomAvailabilityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RoomAvailabilityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>
+        }
+        findFirst: {
+          args: Prisma.RoomAvailabilityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RoomAvailabilityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>
+        }
+        findMany: {
+          args: Prisma.RoomAvailabilityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>[]
+        }
+        create: {
+          args: Prisma.RoomAvailabilityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>
+        }
+        createMany: {
+          args: Prisma.RoomAvailabilityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RoomAvailabilityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>[]
+        }
+        delete: {
+          args: Prisma.RoomAvailabilityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>
+        }
+        update: {
+          args: Prisma.RoomAvailabilityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>
+        }
+        deleteMany: {
+          args: Prisma.RoomAvailabilityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RoomAvailabilityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RoomAvailabilityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>[]
+        }
+        upsert: {
+          args: Prisma.RoomAvailabilityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomAvailabilityPayload>
+        }
+        aggregate: {
+          args: Prisma.RoomAvailabilityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRoomAvailability>
+        }
+        groupBy: {
+          args: Prisma.RoomAvailabilityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomAvailabilityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RoomAvailabilityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomAvailabilityCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -627,6 +702,16 @@ export const RoomScalarFieldEnum = {
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+export const RoomAvailabilityScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  date: 'date',
+  status: 'status'
+} as const
+
+export type RoomAvailabilityScalarFieldEnum = (typeof RoomAvailabilityScalarFieldEnum)[keyof typeof RoomAvailabilityScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -873,6 +958,7 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   hotel?: Prisma.HotelOmit
   room?: Prisma.RoomOmit
+  roomAvailability?: Prisma.RoomAvailabilityOmit
 }
 
 /* Types for Logging */

@@ -25,12 +25,22 @@ enum RoomType{
 }
 
 model Room {
-  id              String   @id @default(uuid())
-  hotelId         String
-  hotel           Hotel    @relation(fields: [hotelId] , references: [id])
-  type            RoomType
-  pricePerNight   Float
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id               String   @id @default(uuid())
+  hotelId          String
+  hotel            Hotel    @relation(fields: [hotelId] , references: [id])
+  type             RoomType
+  pricePerNight    Float
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  RoomAvailability RoomAvailability[]
+}
 
+model RoomAvailability{
+  id          String    @id @default(uuid())
+  roomId      String    
+  room        Room      @relation(fields: [roomId] , references: [id])
+  date        DateTime
+  status      String    @default("BOOKED")
+
+  @@unique([roomId,date])
 }
