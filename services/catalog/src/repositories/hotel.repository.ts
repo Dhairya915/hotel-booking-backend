@@ -21,3 +21,7 @@ export async function findHotelsByCity(city: string): Promise<Hotel[]> {
 export async function findHotelByNameAndCity(name: string, city: string): Promise<Hotel | null> {
   return await prisma.hotel.findFirst({ where: {name , city}})
 }
+
+export async function findHotelById(id: string): Promise<Hotel | null>{
+  return await prisma.hotel.findUnique({ where : { id }});
+}

@@ -9,7 +9,11 @@
 * 🟢 You can import this file directly.
 */
 
+export const RoomType = {
+  SINGLE: 'SINGLE',
+  DOUBLE: 'DOUBLE',
+  DELUXE: 'DELUXE',
+  SUITE: 'SUITE'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type RoomType = (typeof RoomType)[keyof typeof RoomType]

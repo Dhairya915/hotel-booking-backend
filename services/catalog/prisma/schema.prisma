@@ -14,4 +14,23 @@ model Hotel {
   address   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  rooms     Room[]
+}
+
+enum RoomType{
+  SINGLE
+  DOUBLE
+  DELUXE
+  SUITE 
+}
+
+model Room {
+  id              String   @id @default(uuid())
+  hotelId         String
+  hotel           Hotel    @relation(fields: [hotelId] , references: [id])
+  type            RoomType
+  pricePerNight   Float
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
 }

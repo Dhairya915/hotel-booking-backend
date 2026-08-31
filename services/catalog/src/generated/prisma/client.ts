@@ -46,3 +46,8 @@ export { Prisma }
  * 
  */
 export type Hotel = Prisma.HotelModel
+/**
+ * Model Room
+ * 
+ */
+export type Room = Prisma.RoomModel
